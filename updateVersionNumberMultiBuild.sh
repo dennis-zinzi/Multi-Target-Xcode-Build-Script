@@ -1,3 +1,11 @@
+# Author: Dennis Zinzi
+#
+# NOTE: Script will work IF AND ONLY IF the target's Folder name is them same as the name
+# 		of the Target on Xcode minus "fanapp" AND/OR "FC" at the end, for any other instance
+#		the script will not run for the given Target (e.g. Not run if Target name "LutonTownFCfanapp"
+#		and folder name just "Luton" [Will work if Folder name is "LutonTown" OR "LutonTownFC"])
+#
+#!/bin/bash
 
 while read line
 do
@@ -47,4 +55,4 @@ do
 done <XcodeTargets.txt
 
 #Initialise build for all targets specified with new version number
-#. buildMultiXcodeTargets.sh
+. buildMultiXcodeTargets.sh
