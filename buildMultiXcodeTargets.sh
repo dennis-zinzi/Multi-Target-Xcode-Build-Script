@@ -31,4 +31,25 @@ do
 	#Archive Target Build
 	xcodebuild -scheme $line archive -project Spontly_Teams.xcodeproj
 
+	#Remember Current Directory for later
+	projDir=$(pwd)
+
+	#Change Directory to where Target's Archive is stored
+	cd /Volumes/DennisZinziEXT/Development/Xcode/Archives/$(date +%F)/${line%fanapp}**/Products/Applications/
+
+	#Get Name of Target's generated file
+	appName=$(ls -t ${line%fanapp}**.app | head -n 1)
+
+	#Create a zip file of the generated output (required .zip or .ipa to upload to store)
+	zip -r $appName.zip $appName.app
+
+	#Get Directory of altool (command line tool for Application Loader)
+	altool=$(/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool)
+
+	#Upload your app to iTunes Connect Store (replace word afer -u with your Connect username, and word -p with your Connect password)
+	$altool --upload-app -f $appName.zip -u username@email.com -p myPassword
+
+	#Go back to directory to Rebuild remaining Targets
+	cd $projDir
+
 done <XcodeTargets.txt
