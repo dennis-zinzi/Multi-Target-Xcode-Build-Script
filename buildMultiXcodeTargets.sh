@@ -33,7 +33,7 @@ do
 	#Remember Current Directory for later
 	projDir=$(pwd)
 
-	#Change Directory to where Target's Archive is stored
+	#Change Directory to where Target's Archive is stored assuming Target built today
 	cd ~/Users/denniszinzi/Library/Developer/Xcode/Archives/$(date +%F)/
 
 	#Create ipa file from Target's archive
