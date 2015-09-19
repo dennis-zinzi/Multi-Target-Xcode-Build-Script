@@ -1,8 +1,11 @@
 # Multi-Target-Xcode-Build-Script
 
-Shell Scripts to allow the building on several targets of an Xcode project 
+Shell Scripts to allow the building (clean, build, and archive) and Uploading to Store of several targets of an Xcode project 
 
-Purpose of the Three Scripts provided is to allow the building of multiple Targets (Apps) without having to manually do so in Xcode
+Purpose of the Three Scripts provided is to allow the building and uploading of multiple Targets (Apps) without having to manually do so in Xcode
+
+<b>Place the three Scripts and Text file in the same directory of the .xcodeproj you are trying to rebuild and upload for in order for it to work<
+Remeber to change any directory paths and file names in the scripts in order to make them work</b>
 
 ## buildMultiXcodeTargets.sh
 

@@ -14,20 +14,20 @@
 
 while read line
 do
-	#Deletes End-pattern from Target name (in case Folder have different name from Target)
+	#Deletes endpattern from Target name (in case Folder have different name from Target)
 	line=${line%endpattern}
 
 	#Remember current directory
     curDir=$(pwd)
 
-    #Check Directory exists for target
-	if [ ! -d $curDir/SpontlyTeams/Resources/Customisation/$line ]; then
+    #Check Directory exists for target's customization files/images
+	if [ ! -d $curDir/ProjectName/Resources/Customisation/$line ]; then
 
-		#Remove secondary endpattern from Target name (if needed, repeat this step by copying line 23 and 26 until End-pattern exists)
+		#Remove secondary endpattern from Target name (if needed, repeat this step by copying line 23 and 26 until an endpattern exists)
 		line=${line%endpattern2}
 
 		#If still no Directory found for the Target, skip to next one
-		if [ ! -d $curDir/SpontlyTeams/Resources/Customisation/$line ]; then
+		if [ ! -d $curDir/ProjectName/Resources/Customisation/$line ]; then
 				
 			echo "NO FOLDER FOUND FOR TARGET:" $line
 
@@ -44,20 +44,20 @@ do
 	echo "$line"
 
 	#Get current Build number
-	currBuild=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" $curDir/SpontlyTeams/Resources/Customisation/$line/Info.plist)
+	currBuild=$(/usr/libexec/PlistBuddy -c "Print CFBundleVersion" $curDir/ProjectName/Resources/Customisation/$line/Info.plist)
 
 	#Increment Build number by 1
 	newBuildVers=$(($currBuild + 1))
 	echo $newBuildVers
 
 	#Output current Version number
-	defaults read $curDir/SpontlyTeams/Resources/Customisation/$line/Info CFBundleShortVersionString
+	defaults read $curDir/ProjectName/Resources/Customisation/$line/Info CFBundleShortVersionString
 
 	#Overwrite Build number to new one
-	defaults write $curDir/SpontlyTeams/Resources/Customisation/$line/Info CFBundleVersion $newBuildVers
+	defaults write $curDir/ProjectName/Resources/Customisation/$line/Info CFBundleVersion $newBuildVers
 
 	#Output Build number for Target
-	defaults read $curDir/SpontlyTeams/Resources/Customisation/$line/Info CFBundleVersion
+	defaults read $curDir/ProjectName/Resources/Customisation/$line/Info CFBundleVersion
 
 done <XcodeTargets.txt
 

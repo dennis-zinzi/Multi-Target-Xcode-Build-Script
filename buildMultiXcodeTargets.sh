@@ -22,13 +22,13 @@ do
 	echo -e "\n\nBuilding $line Now\n\n" 
 
 	#Clean Target
-	xcodebuild -scheme $line clean -project Spontly_Teams.xcodeproj
+	xcodebuild -scheme $line clean -project ProjectName.xcodeproj
 
 	#Build Target
-	xcodebuild -scheme $line build -project Spontly_Teams.xcodeproj
+	xcodebuild -scheme $line build -project ProjectName.xcodeproj
 
 	#Archive Target Build
-	xcodebuild -scheme $line archive -project Spontly_Teams.xcodeproj
+	xcodebuild -scheme $line archive -project ProjectName.xcodeproj
 
 	#Remember Current Directory for later
 	projDir=$(pwd)
@@ -37,7 +37,7 @@ do
 	cd ~/Users/denniszinzi/Library/Developer/Xcode/Archive/$(date +%F)/
 
 	#Create ipa file from Target's archive
-	xcodebuild -exportArchive -archivePath $line**.xcarchive -exportPath $line -exportFormat ipa --exportProvisioningProfile "$line App Store" #(Provisioning Profile Used for App Store Distribution)
+	xcodebuild -exportArchive -archivePath $line**.xcarchive -exportPath $line -exportFormat ipa -exportProvisioningProfile "$line App Store" #(Provisioning Profile Used for App Store Distribution)
 
 	#Upload your app to iTunes Connect Store (replace word afer -u with your Connect username, and word -p with your Connect password)
 	/Applications/Xcode.app/Contents/Applications/Application\ Loader.app/Contents/Frameworks/ITunesSoftwareService.framework/Versions/A/Support/altool --upload-app -f $line.ipa -u username@email.com -p myPassword

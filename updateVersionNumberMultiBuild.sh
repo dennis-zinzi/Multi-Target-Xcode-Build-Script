@@ -20,14 +20,14 @@ do
 	#Remember current directory
     curDir=$(pwd)
 
-    #Check Directory exists for target
-	if [ ! -d $curDir/SpontlyTeams/Resources/Customisation/$line ]; then
+    #Check Directory exists for target's customization files/images
+	if [ ! -d $curDir/ProjectName/Resources/Customisation/$line ]; then
 
-		#Remove secondary endpattern from Target name (if needed, repeat this step by copying line 23 and 26 until End-pattern exists)
+		#Remove secondary endpattern from Target name (if needed, repeat this step by copying line 23 and 26 until an endpattern exists)
 		line=${line%endpattern2}
 
 		#If still no Directory found for the Target, skip to next one
-		if [ ! -d $curDir/SpontlyTeams/Resources/Customisation/$line ]; then
+		if [ ! -d $curDir/ProjectName/Resources/Customisation/$line ]; then
 				
 			echo "NO FOLDER FOUND FOR TARGET:" $line
 
@@ -44,7 +44,7 @@ do
 	echo "$line"
 
 	#Get current Target version
-	currVersion=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" $curDir/SpontlyTeams/Resources/Customisation/$line/Info.plist)
+	currVersion=$(/usr/libexec/PlistBuddy -c "Print CFBundleShortVersionString" $curDir/ProjectName/Resources/Customisation/$line/Info.plist)
 
 	#Get current Target version's decimal part e.g. (2.1 would retrieve the 1) 
 	newVersDecimal=$(echo $currVersion | awk -F "." '{print $2}')
@@ -56,13 +56,13 @@ do
 	echo $newVers
 
 	#Overwrite new version number
-	defaults write $curDir/SpontlyTeams/Resources/Customisation/$line/Info CFBundleShortVersionString $newVers
+	defaults write $curDir/ProjectName/Resources/Customisation/$line/Info CFBundleShortVersionString $newVers
 
 	#Set Build number back to 1
-	defaults write $curDir/SpontlyTeams/Resources/Customisation/$line/Info CFBundleVersion 1
+	defaults write $curDir/ProjectName/Resources/Customisation/$line/Info CFBundleVersion 1
 
 	#Output Build number for Target
-	defaults read $curDir/SpontlyTeams/Resources/Customisation/$line/Info CFBundleVersion
+	defaults read $curDir/ProjectName/Resources/Customisation/$line/Info CFBundleVersion
 
 done <XcodeTargets.txt
 
