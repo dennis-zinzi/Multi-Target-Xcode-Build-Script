@@ -10,11 +10,11 @@ Simplest script of the Three, simply reads every line in the XcodeTargets.txt fi
 
 ## updateBuildNumberMultiBuild.sh
 
-Increments the each Target's build number according to the build number in the Info.plist file and then performs a clean, build and archive action for the Targets with their updated build number
+Increments the each Target's build number according to the build number in the Info.plist file and then performs a clean, build and archive action for the Targets with their updated build number, and then uploads the new build to the iTunesConnect Store and optionally to Fabric.io for Testers
 
 ## updateVersionNumberMultiBuild.sh
 
-Increments the Target's version number by 0.1 and resets the build number to 1, and then performs the clean, build and archive action with the updated version number for each of the Targets
+Increments the Target's version number by 0.1 and resets the build number to 1, and then performs the clean, build and archive action with the updated version number for each of the Targets, and then uploads the new version to the iTunesConnect Store and optionally to Fabric.io for Testers
 
 ### XcodeTargets.txt
 
