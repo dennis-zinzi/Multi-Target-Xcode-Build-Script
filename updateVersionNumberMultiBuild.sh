@@ -48,6 +48,7 @@ do
 
 	#Get current Target version's decimal part e.g. (2.1 would retrieve the 1) 
 	newVersDecimal=$(echo $currVersion | awk -F "." '{print $2}')
+
 	#Increment Decimal part by 1
 	newVersDecimal=$(($newVersDecimal + 1))
 

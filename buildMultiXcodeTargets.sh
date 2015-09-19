@@ -34,7 +34,7 @@ do
 	projDir=$(pwd)
 
 	#Change Directory to where Target's Archive is stored
-	cd ~/Users/denniszinzi/Library/Developer/Xcode/Archive/$(date +%F)/
+	cd ~/Users/denniszinzi/Library/Developer/Xcode/Archives/$(date +%F)/
 
 	#Create ipa file from Target's archive
 	xcodebuild -exportArchive -archivePath $line**.xcarchive -exportPath $line -exportFormat ipa -exportProvisioningProfile "$line App Store" #(Provisioning Profile Used for App Store Distribution)
