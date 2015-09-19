@@ -1,5 +1,9 @@
 # Author: Dennis Zinzi
 #
+# Script that first increments the current version number of ALL the targets specified in the XcodeTargets.txt
+# file by 0.1, and then cleans, builds, and archives each of the Targets sequentially
+#
+#
 # NOTE: Script will work IF AND ONLY IF the target's Folder name is them same as the name
 # 		of the Target on Xcode minus "fanapp" AND/OR "FC" at the end, for any other instance
 #		the script will not run for the given Target (e.g. Not run if Target name "LutonTownFCfanapp"
@@ -9,26 +13,33 @@
 
 while read line
 do
-	#Deletes fanapp from Target name
-	line=${line%fanapp}
+	#Deletes endpattern from Target name (in case Folder have different name from Target)
+	line=${line%endpattern}
 
-	#Find current directory
+	#Remember current directory
     curDir=$(pwd)
 
     #Check Directory exists for target
 	if [ ! -d $curDir/SpontlyTeams/Resources/Customisation/$line ]; then
 
-		#Remove FC from Target name
-		line=${line%FC}
+		#Remove secondary endpattern from Target name (if needed, repeat this step by copying line 23 and 26 until End-pattern exists)
+		line=${line%endpattern2}
 
 		#If still no Directory found for the Target, skip to next one
 		if [ ! -d $curDir/SpontlyTeams/Resources/Customisation/$line ]; then
+				
 			echo "NO FOLDER FOUND FOR TARGET:" $line
+
+			#Remove Target from Target list on File
+			sed -i '' "/$line/d" XcodeTargets.txt
+
+			#Skip to next Target
 			continue
 		fi
 
 	fi
 
+	#Output Target you are modifying
 	echo "$line"
 
 	#Get current Target version
