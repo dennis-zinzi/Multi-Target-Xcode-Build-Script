@@ -1,6 +1,10 @@
+### List of Apps to be built
+## Add a ‘#’ in front of a target to ignore building it
+##
 Target 1
 Target 2
 Target 3
+#Ignored Target
 .
 .
 .
